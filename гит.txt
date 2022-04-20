@@ -1,0 +1,30 @@
+
+git init
+
+git status 
+git add .
+git status
+git commit -m "Текст коммита"
+git status
+git remote add origin https://github.com/ynivermine92/gulpStart.git
+git pull      скачать
+git push -u origin master
+
+
+ветку создаю ( dev) main главная ветка 
+git branch dev      (создаю ветку dev)
+git checkout dev   (команда менет ветки dev это ветка)
+*****
+git pull --rebase origin master 
+git push -f origin master ( игнорирует ошибку гит Пул)
+git rebase --skip  (решило)
+git config --global user.name "user.name"
+git config --global user.email user@email.com
+**********************************
+git diff(хеш комита) (показывает изминения)
+3 серия 13:52
+git reset (стерает 3 режима --soft -- mixed --hard (HEAD)^ - количество комитов )
+git reset --hard (удаляет без возртано) 
+git reset --mixed (убераються не отслеженую зону)
+git reset --soft(мякий режим) (заращает комит у казаную зону (отслеживаемая зона) удаляются комиты)
+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 пароль

@@ -1,0 +1,14 @@
+﻿Google шрифты: https://fonts.google.com
+
+Название классов: https://github.com/yoksel/common-words
+
+normalize: https://necolas.github.io/normalize.css/
+
+emmet: https://docs.emmet.io/abbreviations/syntax/
+
+флексы - https://habr.com/ru/post/313938/
+Jquery - https://jquery.com/
+Jquery google cdn - https://developers.google.com/speed/libraries
+Slick Slider - https://kenwheeler.github.io/slick/
+
+
