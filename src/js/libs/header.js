@@ -1,40 +1,109 @@
-// Мобильное меню бургер
-function burgerMenu() {
-    const burger = document.querySelector('.burger')
-    const menu = document.querySelector('.menu')
-    const body = document.querySelector('body')
-    burger.addEventListener('click', () => {
-        if (!menu.classList.contains('active')) {
-            menu.classList.add('active')
-            burger.classList.add('active')
-            body.classList.add('locked')
-        } else {
-            menu.classList.remove('active')
-            burger.classList.remove('active')
-            body.classList.remove('locked')
+document.addEventListener("DOMContentLoaded", () => {
+  const languageTab = () => {
+    const languagesItem = document.querySelectorAll(".languages__link");
+    languagesItem.forEach((item) => {
+      item.addEventListener("click", () => {
+        if (!item.classList.contains("active")) {
+          languagesItem.forEach((item) => {
+            item.classList.remove("active");
+          });
+          item.classList.add("active");
         }
-    })
-    // Вот тут мы ставим брейкпоинт навбара
-    window.addEventListener('resize', () => {
-        if (window.innerWidth > 991.98) {
-            menu.classList.remove('active')
-            burger.classList.remove('active')
-            body.classList.remove('locked')
-        }
-    })
-}
-burgerMenu()
+      });
+    });
+  };
 
-// Вызываем эту функцию, если нам нужно зафиксировать меню при скролле.
-function fixedHeader() {
-    const nav = document.querySelector('.header')
+  languageTab();
 
-    // тут указываем в пикселях, сколько нужно проскроллить что бы наше меню стало фиксированным
-    const breakpoint = 1
-    if (window.scrollY >= breakpoint) {
-        nav.classList.add('fixed')
-    } else {
-        nav.classList.remove('fixed')
+  const burger = () => {
+    const burgerBtn = document.querySelector(".burger");
+    const navMenu = document.querySelector(".catalog");
+    burgerBtn.addEventListener("click", () => {
+      navMenu.classList.toggle("active");
+      burgerBtn.classList.toggle("active");
+      if (burgerBtn.classList.contains("active")) {
+      }
+    });
+  };
+
+  burger();
+
+  const sersh = () => {
+    const sershMobBTN = document.querySelector(".header__search-btn");
+    const wrapperSershMob = document.querySelector(".header__box-detals");
+
+    sershMobBTN.addEventListener("click", () => {
+      wrapperSershMob.classList.toggle("active");
+    });
+  };
+
+  sersh();
+
+  const burgerBobMenu = () => {
+    const sershMobBTN = document.querySelector(".burger__mobile-btn");
+    const meneWrapper = document.querySelector(".burger-mobile");
+    const headerDesktop = document.querySelector(".header__desktop");
+    const headerMobile = document.querySelector(".header__mobile");
+    const burgerClouse = document.querySelector(".burger-mobile__image-clouse");
+    const wrapperSershMob = document.querySelector(".header__box-detals");
+
+    sershMobBTN.addEventListener("click", () => {
+      meneWrapper.classList.add("active");
+      if (meneWrapper.classList.contains("active")) {
+        headerDesktop.classList.add("disabled");
+        headerMobile.classList.add("disabled");
+        document.body.classList.add("locked");
+        wrapperSershMob.classList.remove("active");
+      }
+    });
+
+    burgerClouse.addEventListener("click", () => {
+      meneWrapper.classList.remove("active");
+      if (!meneWrapper.classList.contains("active")) {
+        headerDesktop.classList.remove("disabled");
+        headerMobile.classList.remove("disabled");
+        document.body.classList.remove("locked");
+      }
+    });
+
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 1000) {
+        meneWrapper.classList.remove("active");
+        headerDesktop.classList.remove("disabled");
+        headerMobile.classList.remove("disabled");
+        document.body.classList.remove("locked");
+      }
+    });
+  };
+
+  burgerBobMenu();
+
+  const burgerMenuTable = () => {
+    const sershMobBtn = document.querySelector(".burger-mobile__table");
+    const arrowAnimation = document.querySelector(".burger-mobile__arrow");
+    const menuItem = document.querySelector(".burger-mobile__one-items");
+
+    sershMobBtn.addEventListener("click", () => {
+      if (!menuItem.classList.contains("active")) {
+        arrowAnimation.classList.add("active");
+        menuItem.classList.add("active");
+      } else {
+        arrowAnimation.classList.remove("active");
+        menuItem.classList.remove("active");
+      }
+    });
+  };
+
+  burgerMenuTable();
+
+
+
+
+    document.querySelectorAll('.menu__item').forEach(item => {
+    if (item.querySelector('ul')) {
+      item.classList.add('active');
     }
-}
-window.addEventListener('scroll', fixedHeader)
+  });
+
+  
+});
