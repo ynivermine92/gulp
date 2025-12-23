@@ -1,6 +1,4 @@
-
-
-@use '../base/vars' as *; 
+@use "../base/vars" as *;
 // ========================= [ Header styles ] =========================
 .header {
   position: fixed;
@@ -192,8 +190,6 @@
     height: 100%;
     background: black;
     max-width: 300px;
-     
-
   }
   .catalog__wrapper {
     .catalog__category + .catalog__category {
@@ -217,6 +213,22 @@
       transform: translateX(0);
     }
   }
+
+  .menu__item:has(> ul) > .menu__item-link::after {
+    content: "›";
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+
+  .menu__item-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 16px;
+}
+
 
   .catalog__category-two,
   .catalog__category-three {
@@ -281,7 +293,6 @@
   }
 
   &__content {
-
     font-size: 14px;
   }
 
@@ -353,7 +364,6 @@
   }
 
   &__input::placeholder {
-
     font-size: 14px;
     color: gray;
   }
@@ -392,8 +402,6 @@
     height: 100vh;
   }
 
- 
-
   &__one-items {
     padding: 20px;
     border-bottom: 1px solid var(--delider, #f2f2f2);
@@ -405,7 +413,7 @@
 
   &__one-link {
     font-size: 15px;
- 
+
     color: rgba(80, 80, 80, 1);
     transition: all 0.5s;
 
@@ -677,7 +685,6 @@
     &__link {
       color: black;
       font-size: 17px;
-     
     }
 
     &__one-items {

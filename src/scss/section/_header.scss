@@ -1,6 +1,4 @@
-
-
-@use '../base/vars' as *; 
+@use "../base/vars" as *;
 // ========================= [ Header styles ] =========================
 .header {
     background-color: #43adff;
@@ -41,7 +39,7 @@
         color: white;
         display: flex;
         position: relative;
-        transition: 0.5s color;
+        transition: 0.3s color;
         &:after {
             position: absolute;
             content: '';
@@ -52,12 +50,9 @@
             width: 100%;
             transform: scale(0);
             transition: 0.5s transform;
-
-            // Comment if you need border animation
-            display: none;
         }
         &:hover {
-            color: #131418;
+            // color: #131418;
             &:after {
                 transform: scale(1);
             }

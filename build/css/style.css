@@ -1305,8 +1305,8 @@ p {
   display: -ms-flexbox;
   display: flex;
   position: relative;
-  -webkit-transition: 0.5s color;
-  transition: 0.5s color;
+  -webkit-transition: 0.3s color;
+  transition: 0.3s color;
 }
 
 .menu__item-link:after {
@@ -1324,11 +1324,6 @@ p {
   transition: 0.5s -webkit-transform;
   transition: 0.5s transform;
   transition: 0.5s transform, 0.5s -webkit-transform;
-  display: none;
-}
-
-.menu__item-link:hover {
-  color: #131418;
 }
 
 .menu__item-link:hover:after {
