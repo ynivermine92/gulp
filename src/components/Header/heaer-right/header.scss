@@ -184,12 +184,10 @@
   }
 
   &__category {
-    display: flex;
-    flex-direction: column;
+    display: inline-block;
     position: relative;
-    height: 100%;
+    height: auto;
     background: black;
-    max-width: 300px;
   }
   .catalog__wrapper {
     .catalog__category + .catalog__category {
@@ -214,21 +212,16 @@
     }
   }
 
-  .menu__item:has(> ul) > .menu__item-link::after {
-    content: "›";
-    font-size: 16px;
-    flex-shrink: 0;
+
+  .menu__item.active > .menu__item-link .menu__arrow {
+    opacity: 1;
+    visibility: visible;
   }
 
-
-  .menu__item-link {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  font-size: 16px;
-}
-
+  /* анимация при наведении */
+  /* .menu__item:hover > .menu__item-link .menu__arrow {
+  transform: rotate(45deg);
+} */
 
   .catalog__category-two,
   .catalog__category-three {
@@ -240,7 +233,6 @@
     top: 0;
     left: 100%;
     z-index: 10;
-    border: 1px solid red;
     border-bottom: none;
     border-top: none;
 
@@ -249,6 +241,34 @@
     .menu__item {
       display: flex;
     }
+  }
+
+  .menu__item-name {
+    max-width: 200px;
+    line-height: 1.2em;
+  }
+  .menu__item-link {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    font-size: 16px;
+    flex-wrap: wrap;
+    word-break: break-word; /* переносит длинные слова */
+    overflow-wrap: break-word; /* для совместимости с разными браузерами */
+  }
+
+  .menu__arrow {
+    width: 8px;
+    height: 8px;
+    margin-left: auto;
+    border-right: 2px solid #ffff;
+    border-bottom: 2px solid #ffff;
+    transform: rotate(-45deg);
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s;
   }
 }
 

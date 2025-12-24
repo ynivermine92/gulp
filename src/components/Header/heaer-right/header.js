@@ -96,5 +96,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   burgerMenuTable();
 
+
+
+
+    document.querySelectorAll('.menu__item').forEach(item => {
+    if (item.querySelector('ul')) {
+      item.classList.add('active');
+    }
+  });
+
   
 });
