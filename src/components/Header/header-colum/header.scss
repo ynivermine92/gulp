@@ -183,54 +183,6 @@
     display: flex;
     gap: 20px;
   }
-
-  &__category {
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    height: 100%;
-    max-width: 300px;
-  }
-  .catalog__category-two,
-  .catalog__category-three {
-    overflow: hidden;
-    max-height: 0;
-    opacity: 0;
-    transform: translateY(-5px);
-    transition: max-height 0.35s ease, opacity 0.25s ease, transform 0.25s ease;
-  }
-
-  .menu__item.active > .catalog__category-two,
-  .menu__item.active > .catalog__category-three {
-    max-height: 500px;
-    opacity: 1;
-    transform: translateY(0);
-    padding: 10px 10px;
-  }
-
-  .menu__item-link {
-    position: relative;
-    display: flex;
-    /*   justify-content: space-between; */
-    align-items: center;
-    cursor: pointer;
-    text-decoration: none;
-    color: black;
-    font-size: 16px;
-  }
-
-  .menu__item.has-submenu > .menu__item-link::after {
-    content: ">"; /* стрелка вниз */
-    font-size: 16px;
-    margin-left: 8px;
-    transition: transform 0.3s ease;
-    display: inline-block;
-    transform: rotate(270deg);
-  }
-
-  .menu__item.active > .menu__item-link::after {
-    transform: rotate(90deg);
-  }
 }
 
 .burger {
@@ -415,6 +367,172 @@
   &__social-image {
     width: 40px;
     height: 40px;
+  }
+}
+
+@keyframes showNav {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+
+  60% {
+    opacity: 1;
+    transform: translateY(-5px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 1450px) {
+  .header {
+    .logo {
+      max-width: 200px;
+      height: 30px;
+    }
+
+    .header__tel {
+      font-size: 16px;
+      max-width: 150px;
+    }
+  }
+
+  .burger {
+    padding: 10px;
+    width: 40px;
+    height: 40px;
+
+    &__content {
+      display: none;
+    }
+
+    &.active {
+      padding: 11px;
+
+      .burger__box::before {
+        top: 10px;
+        left: -1px;
+      }
+
+      .burger__box::after {
+        bottom: 12px;
+        left: -2px;
+      }
+    }
+  }
+
+  .search {
+    &__btn {
+      flex: 0 0 100px;
+    }
+  }
+}
+
+.burger-mobile {
+  display: none;
+
+  &.active {
+    display: block;
+    position: relative;
+    background: #fff;
+    z-index: 10;
+    height: 100vh;
+  }
+
+  &__one-item {
+    padding: 10px;
+  }
+
+  &__one-link {
+    font-size: 15px;
+
+    color: rgba(80, 80, 80, 1);
+    transition: all 0.5s;
+
+    &:hover {
+      color: #1577ca;
+      transition: all 0.5s;
+    }
+  }
+
+  &__social {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 40px 0;
+  }
+
+  &__social-image {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+.spoller {
+  padding: 25px 20px;
+
+  &__item {
+    &:not(:last-child) {
+      margin-bottom: 20px;
+    }
+  }
+
+  &__title,
+  &__subtitle {
+    display: inline-block;
+    border-bottom: 1px dashed #404040;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 1;
+    color: #404040;
+    cursor: pointer;
+
+    &.open {
+      border-bottom: none;
+    }
+  }
+
+  &__subtitle {
+    font-weight: 400;
+    font-size: 16px;
+    color: #565656;
+  }
+
+  &__body {
+    height: 0px;
+    overflow: hidden;
+    transition: height 500ms ease;
+  }
+
+  &__list {
+    margin-top: 20px;
+  }
+
+  &__link {
+    font-size: 14px;
+    color: #2f80ed;
+    margin-top: 20px;
+  }
+  .js-title{
+    padding-right: 2px;
+  }
+  .js-title .arrow {
+    display: inline-block;
+    margin-left: 10px;
+    width: 10px;
+    height: 10px;
+    border-right: 2px solid black;
+    border-bottom: 2px solid black;
+    transform: rotate(45deg);
+    transition: transform 0.3s;
+  }
+
+  .js-title.open .arrow {
+    transform: rotate(-135deg);
   }
 }
 
@@ -668,14 +786,16 @@
       font-size: 17px;
     }
 
-    &__one-items {
+    .spoller {
+      padding: 20px;
+      border-bottom: 1px solid var(--delider, #f2f2f2);
       position: absolute;
       z-index: -1;
       opacity: 0;
       transition: all 0.5s;
     }
 
-    &__one-items.active {
+    .spoller.active {
       position: unset;
       z-index: 1;
       opacity: 1;
