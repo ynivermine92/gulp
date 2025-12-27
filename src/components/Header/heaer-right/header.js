@@ -96,66 +96,112 @@ document.addEventListener("DOMContentLoaded", () => {
 
   burgerMenuTable();
 
- const mobileMenu = () => {
-  const spollerTriggers = document.querySelectorAll(".js-title");
+  const mobileMenu = () => {
+    const spollerTriggers = document.querySelectorAll(".js-title");
 
-  const spollerTriggerDisable = (trigger) => {
-    trigger.disabled = true;
-    setTimeout(() => {
-      trigger.disabled = false;
-    }, 500);
-  };
+    const spollerTriggerDisable = (trigger) => {
+      trigger.disabled = true;
+      setTimeout(() => {
+        trigger.disabled = false;
+      }, 500);
+    };
 
-  const spollerOpen = (trigger, body) => {
-    body.style.height = body.scrollHeight + "px";
-    trigger.classList.add("open"); // добавляем класс open
-  };
+    const spollerOpen = (trigger, body) => {
+      body.style.height = body.scrollHeight + "px";
+      trigger.classList.add("open"); // добавляем класс open
+    };
 
-  const spollerClose = (trigger, body) => {
-    body.style.height = body.scrollHeight + "px";
-    setTimeout(() => {
-      body.style.height = "0";
-      trigger.classList.remove("open"); // убираем класс open
-    }, 0);
-  };
+    const spollerClose = (trigger, body) => {
+      body.style.height = body.scrollHeight + "px";
+      setTimeout(() => {
+        body.style.height = "0";
+        trigger.classList.remove("open"); // убираем класс open
+      }, 0);
+    };
 
-  const setHeightOnTransitionEnd = (body) => {
-    body.addEventListener("transitionend", () => {
-      if (body.style.height !== "0px") {
-        body.style.height = "auto";
+    const setHeightOnTransitionEnd = (body) => {
+      body.addEventListener("transitionend", () => {
+        if (body.style.height !== "0px") {
+          body.style.height = "auto";
+        }
+      });
+    };
+
+    const spollerToggle = (trigger) => {
+      const body = trigger
+        .closest(".spoller__item")
+        .querySelector(".spoller__body");
+      setHeightOnTransitionEnd(body);
+
+      if (trigger.classList.contains("open")) {
+        spollerClose(trigger, body);
+      } else {
+        spollerOpen(trigger, body);
       }
+
+      spollerTriggerDisable(trigger);
+    };
+
+    spollerTriggers.forEach((trigger) => {
+      // добавим стрелку, если её нет
+      if (!trigger.querySelector(".arrow")) {
+        const arrow = document.createElement("span");
+        arrow.classList.add("arrow"); // CSS класс для стрелки
+        trigger.appendChild(arrow);
+      }
+
+      trigger.addEventListener("click", (e) => {
+        spollerToggle(e.currentTarget);
+      });
     });
   };
 
-  const spollerToggle = (trigger) => {
-    const body = trigger.closest(".spoller__item").querySelector(".spoller__body");
-    setHeightOnTransitionEnd(body);
+  mobileMenu();
 
-    if (trigger.classList.contains("open")) {
-      spollerClose(trigger, body);
-    } else {
-      spollerOpen(trigger, body);
+  const megaMenuHeight = () => {
+    const catalog = document.querySelector(".catalog");
+
+    if (catalog) {
+      const setEqualHeight = () => {
+        const categories = catalog.querySelectorAll(".catalog__category");
+        let maxHeight = 0;
+
+        categories.forEach((cat) => (cat.style.height = "auto"));
+
+        categories.forEach((cat) => {
+          if (cat.offsetParent !== null) {
+            maxHeight = Math.max(maxHeight, cat.scrollHeight);
+          }
+        });
+
+        categories.forEach((cat) => {
+          if (cat.offsetParent !== null) {
+            cat.style.height = maxHeight + "px";
+          }
+        });
+      };
+
+      if (catalog.classList.contains("active")) {
+        setEqualHeight();
+      }
+
+      const observer = new MutationObserver(() => {
+        if (catalog.classList.contains("active")) {
+          setEqualHeight();
+        } else {
+          // Сброс при закрытии меню
+          catalog.querySelectorAll(".catalog__category").forEach((cat) => {
+            cat.style.height = "";
+          });
+        }
+      });
+
+      observer.observe(catalog, {
+        attributes: true,
+        attributeFilter: ["class"],
+      });
     }
-
-    spollerTriggerDisable(trigger);
   };
 
-  spollerTriggers.forEach((trigger) => {
-    // добавим стрелку, если её нет
-    if (!trigger.querySelector(".arrow")) {
-      const arrow = document.createElement("span");
-      arrow.classList.add("arrow"); // CSS класс для стрелки
-      trigger.appendChild(arrow);
-    }
-
-    trigger.addEventListener("click", (e) => {
-      spollerToggle(e.currentTarget);
-    });
-  });
-};
-
-mobileMenu();
-
-
-  
+  megaMenuHeight();
 });

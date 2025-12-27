@@ -153,14 +153,19 @@
   z-index: -1;
   border: 1px solid #f2f2f2;
   border-radius: 6px;
-  display: none;
+  display: block; // заменили display:none
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.6s ease, transform 0.6s ease;
 
   &.active {
     animation: showNav 0.6s ease forwards;
     z-index: 2;
     padding: 25px 30px 40px;
-    display: block;
     opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0);
   }
 
   /* ---------- TITLE ---------- */
@@ -186,14 +191,16 @@
   /* ---------- WRAPPER ---------- */
   &__wrapper {
     display: flex;
-    align-items: flex-start;
   }
 
   /* ---------- CATEGORY (UL) ---------- */
-  &__category {
+  .catalog__category {
     position: relative;
-    height: auto;
     background: #000;
+    align-self: stretch;
+    height: auto;
+    min-height: 100%;
+    transition: height 0.35s ease;
 
     & + & {
       margin-left: 20px;
@@ -205,39 +212,39 @@
   .menu__item {
     padding: 6px 20px;
     line-height: 1.4;
-    position: static; 
+    position: static;
 
     &:hover {
       > .catalog__category-two,
       > .catalog__category-three {
-        display: block;
         opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
         transform: translateX(0);
       }
     }
   }
-.catalog__category{
-  min-height: 100%;
-}
+
+  /* ---------- SUBMENU 2 и 3 уровня ---------- */
   .catalog__category-two,
   .catalog__category-three {
     position: absolute;
     top: 0;
     left: 100%;
     z-index: 10;
-    display: none;
-    opacity: 0;
-    transform: translateX(10px);
-    transition: opacity 0.25s ease, transform 0.25s ease;
 
     min-width: 260px;
     max-width: 300px;
 
-    .menu__item {
-      display: block;
-    }
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    transform: translateX(10px);
+    transition: opacity 0.25s ease, transform 0.25s ease;
   }
 
+  /* ---------- MENU LINK ---------- */
   .menu__item-link {
     display: flex;
     align-items: center;
@@ -255,35 +262,34 @@
     word-break: break-word;
   }
 
+  /* ---------- ARROW ---------- */
+  .menu__arrow {
+    flex-shrink: 0;
+    width: 8px;
+    height: 8px;
+    margin-left: auto;
 
-/* ---------- ARROW ---------- */
-.menu__arrow {
-  flex-shrink: 0;
-  width: 8px;
-  height: 8px;
-  margin-left: auto;
+    border-right: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+    transform: rotate(-45deg);
 
-  border-right: 2px solid #fff;
-  border-bottom: 2px solid #fff;
-  transform: rotate(-45deg);
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s;
+  }
 
-  opacity: 0;
-  visibility: hidden;
-  transition: 0.3s;
-}
-
-/* ---------- SHOW ARROW ONLY IF HAS CHILD ---------- */
-.menu__item:has(> .catalog__category-two),
-.menu__item:has(> .catalog__category-three) {
-  > .menu__item-link {
-    .menu__arrow {
-      opacity: 1;
-      visibility: visible;
+  /* ---------- SHOW ARROW ONLY IF HAS CHILD ---------- */
+  .menu__item:has(> .catalog__category-two),
+  .menu__item:has(> .catalog__category-three) {
+    > .menu__item-link {
+      .menu__arrow {
+        opacity: 1;
+        visibility: visible;
+      }
     }
   }
 }
 
-}
 
 .burger {
   background: #1577ca;
